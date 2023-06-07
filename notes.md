@@ -122,7 +122,7 @@ Guest user enclave。
 
 # TEE
 
-![Screen Shot 2023-06-07 at 19.51.01](/Users/tao/Desktop/Screen Shot 2023-06-07 at 19.51.01.png)
+![Screen Shot 2023-06-07 at 19.51.01](./Screen Shot 2023-06-07 at 19.51.01.png)
 
 ## 主流TEE
 
