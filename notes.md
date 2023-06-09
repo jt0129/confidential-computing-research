@@ -20,7 +20,9 @@ https://www.processon.com/v/647860e12acefa1f4bbbede1
 
 信任根：永久可信的组件。
 
+# TEE方案
 
+![Screenshot from 2023-06-09 08-16-34](./Screenshot from 2023-06-09 08-16-34.png)
 
 # Intel放弃SGX
 
@@ -98,9 +100,40 @@ HyperEnclave提供了一种开放通用的TEE解决方案，支持多种硬件�
 
 阐述了HyperEnclave的设计原理及创新点。HyperEnclave利用广泛支持的虚拟化技术构建安全边界，基于**TPM**构建可信根，可支持当前主流硬件架构，如Hygon、AMD和Intel CPU，避免了绑定特定硬件平台。
 
+## 安全隔离
+
+![Screenshot from 2023-06-09 08-21-18](./Screenshot from 2023-06-09 08-21-18.png)
+
+## 环境可信
+
+```text
+“把大象放入冰箱需要几步”
+```
+
+如何通过“信任链”建立可信执行环境
+可以分为三步来理解它
+
+- 可信根
+- 可信链
+- 度量/验证
+
+## 远程证明
+
+CA：**数字证书认证机构**（英语：Certificate Authority，缩写为CA），也称为**电子商务认证中心**、**电子商务认证授权机构**，是负责发放和管理[数字证书](https://zh.wikipedia.org/wiki/数字证书)的权威机构，并作为[电子商务](https://zh.wikipedia.org/wiki/电子商务)交易中受信任的第三方，承担公钥体系中[公钥](https://zh.wikipedia.org/wiki/公钥)的合法性检验的责任。
+
+ROT：可信根
+
+![Screenshot from 2023-06-09 08-37-25](./Screenshot from 2023-06-09 08-37-25.png)
+
+## TEE运行模式
 
 
-　　针对TEE典型应用特点，HyperEnclave提供了**三种Enclave运行模式**
+
+![Screenshot from 2023-06-09 08-49-38](./Screenshot from 2023-06-09 08-49-38.png)
+
+
+
+针对TEE典型应用特点，HyperEnclave提供了**三种Enclave运行模式**
 
 * monitor mode:映射到VMX root模式
 * normal mode:不受信任的OS和应用运行在此，映射到VMX non-root模式
@@ -110,13 +143,21 @@ HyperEnclave提供了一种开放通用的TEE解决方案，支持多种硬件�
 
 ![图：HyperEnclave的三种运行模式](https://pic.rmb.bdstatic.com/bjh/news/b9f2d84c1e7692d3589f74b69d01fc57.jpeg)
 
-## GU-Enclave
+* GU-Enclave：Guest user enclave
+*  P-Enclave： running in guest privileged mode and optional guest user mode
+* HU-Enclave： running in host user mode
 
-Guest user enclave。
+## HyperenEnclave SDK
 
+* 兼容 SGX SDK API
+* 默认支持：
+  * Rust SGX SDK
+  * Occlum LibOS
+* 少量修改即可运行已有SGX应用
 
+## HyperEnclave性能
 
-隐私计算技术当前一大挑战是，安全性的提升往往带来性能的下降，二者较难兼顾。在TEE应用负载性能测试中，HyperEnclave 在计算密集型(NBench)，内存密集型(SQLite)，I/O密集型(lighttpd)，混合型(Redis)等不同属性的工作负载下均表现出良好的性能，同等安全等级下，HyperEnclave相比其他TEE产品性能更强。
+隐私计算技术当前一大挑战是，安全性的提升往往带来性能的下降，二者较难兼顾。在TEE应用负载性能测试中，HyperEnclave 在计算密集型(NBench)，内存密集型(SQLite)，I/O密集型(lighttpd)，混合型(Redis)等不同属性的工作负载下均表现出良好的性能，同等安全等级下，相比其他TEE产品性能更强。
 
 ![图：TEE应用负载性能测试](https://pic.rmb.bdstatic.com/bjh/news/94dfdde226b54ac671f66564911b0199.jpeg)
 
